@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo_symbol.png" alt="Halal OS Logo Symbol" width="128" height="128" />
+</p>
+
 <div align="center">
   <img src="assets/logo.png" width="140" alt="Halal Os App Icon / Logo" /><br />
   <h1>Halal Os</h1>

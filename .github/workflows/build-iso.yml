@@ -67,5 +67,15 @@ jobs:
             ## ☪ Halal OS v2.0 (Sovereign Live Edition)
             Official sovereign Linux distribution with 100% offline standalone capability, native Rust daemons, and embedded local AI.
             
-            ### Integrity Checksums
+            ### 💿 How to Flash with Rufus (دليل الحرق على فلاشة وتثبيت النظام):
+            1. **Download**: Download `halal-os-v2.0-amd64.iso` below.
+            2. **Launch Rufus**: Open [Rufus](https://rufus.ie/) on Windows.
+            3. **Select Device**: Choose your USB flash drive (8GB+ recommended).
+            4. **Boot Selection**: Click **SELECT** and choose `halal-os-v2.0-amd64.iso`.
+            5. **Partition Scheme**: Select **GPT** (for modern UEFI systems) or **MBR** (for legacy BIOS).
+            6. **Write Mode**: When prompted, choose **Write in ISO Image mode** (or DD mode).
+            7. **Boot**: Plug into your laptop, restart, enter Boot Menu (F12/F11/F9/Esc), and select the USB.
+            8. **Bismillah**: Choose `☪ Launch Halal OS v2.0 (Bismillah - Sovereign Mode)` to run live or install with Calamares.
+
+            ### 🔒 Integrity Verification
             - Verify with `sha256sum -c SHA256SUMS`

@@ -94,10 +94,43 @@ halal-os/
    cp .env.example .env
    ```
 
-4. **Run Application**:
+4. **Run Application & Services**:
    ```bash
-   npm test
+   npm start      # Web Desktop Shell
+   npm run store  # Islamic App Store Microservice (Go)
+   npm run cloud  # Sovereign Cloud & P2P Mesh (Go)
+   npm run ai     # Amina AI Offline RAG Engine (Python)
+   npm test       # Run full 123-test validation suite
    ```
+
+---
+
+## 💿 Download & Install Live ISO (دليل حرق وتثبيت النظام عبر روفوس)
+
+Anyone can download the bootable sovereign **Halal OS ISO** directly from GitHub Releases and install it on any laptop or PC using **Rufus**:
+
+### 📥 1. Download the ISO
+- Go to [Halal OS Releases](https://github.com/ahmedfawzyjr/halal-os/releases).
+- Download `halal-os-v2.0-amd64.iso` and `SHA256SUMS`.
+- (Optional) Verify checksum: `sha256sum -c SHA256SUMS`.
+
+### ⚡ 2. Flash to USB via Rufus
+1. Download and run [Rufus](https://rufus.ie/) on Windows.
+2. Insert a USB flash drive (8 GB or larger).
+3. Under **Device**, select your USB flash drive.
+4. Under **Boot selection**, click **SELECT** and choose `halal-os-v2.0-amd64.iso`.
+5. Under **Partition scheme**:
+   - Choose **GPT** for modern laptops (UEFI boot).
+   - Choose **MBR** for older PCs (Legacy BIOS).
+6. Click **START**. If prompted, select **Write in ISO Image mode** (or DD mode).
+7. Wait until the progress bar shows **READY**.
+
+### 💻 3. Boot & Install on Laptop
+1. Insert the USB flash drive into your target laptop/PC.
+2. Power on and repeatedly tap your laptop's **Boot Menu key** (commonly `F12` on Dell/Lenovo, `F9` on HP, `F11` on MSI, or `Esc`/`F2` on Asus/Acer).
+3. Select your USB drive from the boot menu.
+4. In the GRUB menu, select **`☪ Launch Halal OS v2.0 (Bismillah - Sovereign Mode)`**.
+5. Once inside the live desktop, you can use Halal OS directly in live mode or click **Install Halal OS** (Calamares) to install it permanently on your hard drive alongside or replacing your existing OS.
 
 ---
 

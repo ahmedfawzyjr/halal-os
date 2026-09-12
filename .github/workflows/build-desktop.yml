@@ -87,7 +87,7 @@ jobs:
           Get-ChildItem -Path src-tauri/target/release/bundle -Recurse -Include *.msi,*.exe | Get-FileHash -Algorithm SHA256 | Out-File target/checksums/SHA256SUMS-windows.txt
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: halal-os-desktop-${{ matrix.platform }}
           path: |

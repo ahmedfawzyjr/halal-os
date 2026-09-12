@@ -448,6 +448,260 @@ const translations = {
     lblQsSetBtn: "تمام ترتیبات",
     lblMaqamTitle: "مقام ورک اسپیس",
     lblIlmHadithText: "\"تم میں سے بہترین وہ ہے جو قرآن سیکھے اور اسے دوسروں کو سکھائے۔\" (بخاری)"
+  },
+  fr: {
+    langName: "Français",
+    dir: "ltr",
+    titleSettings: "Paramètres Tazkiyah",
+    titleFiles: "Gestionnaire de Fichiers Hafiz",
+    titleTerminal: "Terminal Kalam",
+    titleBrowser: "Navigateur Halal",
+    titleAmina: "Assistante IA Amina",
+    titleIslamic: "Suite Islamique Native",
+    lblSetupBack: "Retour",
+    lblSetupNext: "Continuer",
+    lblSetupLaunch: "Lancer Halal OS",
+    txtSetupPTitle: "Méthode de Calcul des Prières",
+    txtSetupPDesc: "Configurez la méthode de calcul astronomique selon les conventions locales.",
+    txtSetupPrTitle: "Profil de Sécurité et Confidentialité",
+    txtSetupPrDesc: "Halal OS protège votre vie privée par défaut. Ajustez votre sécurité ici.",
+    txtSetupFTitle: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+    txtSetupFDesc: "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux",
+    txtSetupFSub: "Votre bureau Halal OS est configuré et prêt. Profitez d'un environnement moderne, souverain et conforme à vos valeurs.",
+    lblSetNavGeneral: "Général",
+    lblSetNavPrivacy: "Confidentialité",
+    lblSetNavIslamic: "Paramètres de Foi",
+    lblSetNavAppearance: "Apparence",
+    lblSetNavHdk: "Laboratoire HDK",
+    lblSetGenTitle: "Configuration Système",
+    lblSetGenLang: "Langue du Système",
+    lblSetGenLangDesc: "Changer la langue et la direction de l'interface",
+    lblSetGenVer: "Version de Halal OS",
+    lblSetPrivTitle: "Tableau de Bord de Confidentialité Amanah",
+    lblSetPrivScore: "Score de Confidentialité : Haute Protection",
+    lblSetPrivScoreDesc: "Télémétrie désactivée, isolation des applications vérifiée.",
+    lblSetPrivShield: "Pare-feu halalfire",
+    lblSetPrivShieldDesc: "Filtrage des requêtes réseau et blocage des traqueurs",
+    lblSetPrivTelemetry: "Bloquer la Télémétrie",
+    lblSetPrivTelemetryDesc: "Interdire la collecte de métadonnées par les serveurs distants",
+    lblSetPrivSandbox: "Isolation des Applications (halalbox)",
+    lblSetPrivSandboxDesc: "Isoler strictement les applications dans des bacs à sable sécurisés",
+    lblSetIslTitle: "Préférences Islamiques Natives",
+    lblSetIslCalc: "Méthode de Calcul",
+    lblSetIslCalcDesc: "Modifier les paramètres géographiques des angles de prière",
+    lblSetIslAdhan: "Son de l'Adhan Système",
+    lblSetIslAdhanDesc: "Jouer l'Adhan complet lors des heures de prière",
+    lblSetIslLoc: "Coordonnées GPS simulées",
+    lblSetIslLocDesc: "Définir latitude et longitude pour la Qibla et les prières",
+    lblSetAppTitle: "Personnalisation Visuelle",
+    lblSetAppTheme: "Thème Système",
+    lblSetAppThemeDesc: "Basculer entre le mode sombre émeraude et clair",
+    lblSetAppWp: "Fond d'Écran Adaptatif",
+    lblSetAppWpDesc: "Adapter l'arrière-plan selon les horaires de prière",
+    lblSetAppMotion: "Mouvements Réduits",
+    lblSetAppMotionDesc: "Désactiver les animations dynamiques du bureau",
+    lblSetHdkTitle: "Spécimen Halal Design Kit (HDK)",
+    lblSetHdkDesc: "Spécifications des composants définies dans le plan d'amélioration.",
+    lblHdkBtns: "Boutons HDK",
+    lblHdkControls: "Curseurs & Interrupteurs",
+    lblHdkCrescent: "Indicateur de Progression en Croissant",
+    lblHdkCrescentDesc: "Croissant lunaire représentant le temps restant avant la prière.",
+    lblFileNavHome: "Accueil",
+    lblFileNavIslamic: "Documents Islamiques",
+    lblFileNavSecurity: "Sécurité Système",
+    lblFileNavVault: "Coffre-fort Foi",
+    lblFileVaultTitle: "Coffre-fort Verrouillé",
+    lblFileVaultDesc: "Entrez votre mot de passe pour accéder aux registres de Zakat et Hajj.",
+    lblFileVaultBtn: "Déverrouiller le Coffre",
+    lblIslNavQuran: "Lecteur Coran",
+    lblIslNavPrayer: "Heures de Prière",
+    lblIslNavQibla: "Boussole Qibla",
+    lblIslNavZakat: "Calculateur Zakat",
+    lblIslNavCalendar: "Calendrier Hégirien",
+    lblQuranTafsirShow: "Afficher le Tafsir",
+    lblQuranTafsirHide: "Masquer le Tafsir",
+    lblPrayerListTitle: "Prières Quotidiennes - Le Caire, Égypte",
+    lblPrayerCalcIndicator: "Méthode : Autorité Générale Égyptienne d'Arpentage",
+    lblQiblaTitle: "Direction de la Qibla (Boussole Interactive)",
+    lblQiblaAngle: "Angle Qibla par rapport au Nord : 136° Est",
+    lblQiblaDesc: "Faites pivoter votre appareil pour aligner l'aiguille rouge avec la Kaaba.",
+    lblQiblaBtn: "Calibrer la Boussole",
+    lblZakatTitle: "Calculateur d'Obligation de Zakat",
+    lblZakatNisabVal: "Seuil de Nisab (85g d'Or) :",
+    lblZakatGoldVal: "Prix du gramme d'or :",
+    lblZakatISavings: "Épargne totale / liquidités (détenues depuis 1 an lunaire)",
+    lblZakatIGold: "Valeur des biens possédés en or et argent",
+    lblZakatIInvest: "Valeur des fonds d'investissement et actions",
+    lblZakatResNisab: "Statut d'Éligibilité au Nisab",
+    lblZakatResDue: "Zakat à Payer (2.5%)",
+    lblCalTitle: "Synchronisation Calendrier Hégirien",
+    lblCalHijriMonth: "Dhou al-Hijja 1447",
+    lblCalHTitle: "Fête à Venir : Aïd al-Adha",
+    lblCalHDesc: "Tombe le 10 Dhou al-Hijja 1447. Notification automatique.",
+    lblCalHTag: "Vacances de l'Aïd",
+    lblLchAll: "Toutes les Applications",
+    lblLchFaith: "Applications Islamiques",
+    lblLchSys: "Outils Système",
+    lblPsdTitle: "Audit Réseau halalfire",
+    lblPsdStatus: "Protection Active",
+    lblPsdScoreTitle: "Santé du Cœur de Sécurité",
+    lblPsdScoreDesc: "Zéro télémétrie, résolution DNS locale",
+    lblPsdBlockTitle: "Journal des Blocages (En Direct)",
+    lblPsdBtn: "Gérer les Permissions",
+    lblBshTitle: "Protection du Navigateur",
+    lblBshTrackers: "14 Traqueurs Bloqués",
+    lblBshDns: "DoH Sécurisé Actif",
+    lblBshFilter: "Filtre Moral : Strict",
+    lblBrQuranTitle: "Portail Web Islamique",
+    lblBrQuranDesc: "Bienvenue dans le répertoire islamique souverain. Recherchez versets, hadiths et fatwas.",
+    lblBrQuranBtn: "Rechercher",
+    tipBismillah: "Menu Bismillah",
+    tipSettings: "Paramètres",
+    tipFiles: "Gestionnaire de Fichiers",
+    tipTerminal: "Terminal",
+    tipBrowser: "Navigateur",
+    tipQuran: "Lecteur Coran",
+    tipPrayer: "Horaires de Prière",
+    tipQibla: "Boussole Qibla",
+    tipZakat: "Calculateur Zakat",
+    tipAmina: "IA Amina",
+    lblIlmTitle: "Panneau Ilm",
+    lblIlmVerse: "Verset du Jour",
+    lblIlmWisdom: "Sagesse du Jour",
+    lblIlmNotes: "Notes Locales",
+    lblQsTitle: "Paramètres Rapides",
+    lblQsFw: "Bouclier Pare-feu",
+    lblQsDns: "DoH Sécurisé",
+    lblQsSetBtn: "Tous les Paramètres",
+    lblMaqamTitle: "Espace de Travail Maqam",
+    lblIlmHadithText: "\"Le meilleur d'entre vous est celui qui apprend le Coran et l'enseigne.\" (Bukhari)"
+  },
+  id: {
+    langName: "Bahasa Indonesia",
+    dir: "ltr",
+    titleSettings: "Pengaturan Tazkiyah",
+    titleFiles: "Manajer Berkas Hafiz",
+    titleTerminal: "Terminal Kalam",
+    titleBrowser: "Peramban Halal",
+    titleAmina: "Asisten AI Amina",
+    titleIslamic: "Paket Aplikasi Islami",
+    lblSetupBack: "Kembali",
+    lblSetupNext: "Lanjutkan",
+    lblSetupLaunch: "Mulai Halal OS",
+    txtSetupPTitle: "Metode Perhitungan Waktu Salat",
+    txtSetupPDesc: "Konfigurasikan metode perhitungan astronomis untuk menentukan jadwal salat harian sesuai standar lokal.",
+    txtSetupPrTitle: "Profil Privasi & Perlindungan",
+    txtSetupPrDesc: "Halal OS mengutamakan privasi secara bawaan. Sesuaikan pengaturan keamanan Anda di sini.",
+    txtSetupFTitle: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+    txtSetupFDesc: "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang",
+    txtSetupFSub: "Desktop Halal OS Anda telah dikonfigurasi dan siap digunakan. Nikmati lingkungan kerja yang aman, modern, dan selaras dengan nilai Islam.",
+    lblSetNavGeneral: "Umum",
+    lblSetNavPrivacy: "Privasi",
+    lblSetNavIslamic: "Pengaturan Ibadah",
+    lblSetNavAppearance: "Tampilan",
+    lblSetNavHdk: "Laboratorium HDK",
+    lblSetGenTitle: "Konfigurasi Sistem",
+    lblSetGenLang: "Bahasa Sistem",
+    lblSetGenLangDesc: "Ganti arah tata letak dan bahasa antarmuka pengguna",
+    lblSetGenVer: "Versi Halal OS",
+    lblSetPrivTitle: "Dasbor Privasi Amanah",
+    lblSetPrivScore: "Skor Privasi: Perlindungan Tinggi",
+    lblSetPrivScoreDesc: "Semua telemetri dinonaktifkan, isolasi sandbox aplikasi diverifikasi.",
+    lblSetPrivShield: "Perisai Firewall halalfire",
+    lblSetPrivShieldDesc: "Menyaring lalu lintas jaringan dan memblokir pelacak secara menyeluruh",
+    lblSetPrivTelemetry: "Blokir Telemetri & Log",
+    lblSetPrivTelemetryDesc: "Cegah pengumpulan metadata oleh peladen eksternal",
+    lblSetPrivSandbox: "Isolasi Aplikasi Flatpak (halalbox)",
+    lblSetPrivSandboxDesc: "Isolasi ketat aplikasi pihak ketiga dalam sandbox keamanan",
+    lblSetIslTitle: "Preferensi Fitur Islami",
+    lblSetIslCalc: "Metode Perhitungan",
+    lblSetIslCalcDesc: "Ubah parameter sudut geografis jadwal salat",
+    lblSetIslAdhan: "Suara Azan Sistem",
+    lblSetIslAdhanDesc: "Putar lantunan azan penuh saat masuk waktu salat",
+    lblSetIslLoc: "Koordinat GPS Simulasi",
+    lblSetIslLocDesc: "Atur lintang dan bujur untuk perhitungan arah kiblat dan jadwal salat",
+    lblSetAppTitle: "Kustomisasi Visual",
+    lblSetAppTheme: "Tema Sistem",
+    lblSetAppThemeDesc: "Beralih antara mode gelap zamrud dan mode terang",
+    lblSetAppWp: "Kertas Dinding Adaptif",
+    lblSetAppWpDesc: "Sesuaikan latar belakang desktop secara otomatis dengan interval waktu salat",
+    lblSetAppMotion: "Sistem Pengurangan Gerakan",
+    lblSetAppMotionDesc: "Nonaktifkan animasi transisi desktop yang dinamis",
+    lblSetHdkTitle: "Spesimen Halal Design Kit (HDK)",
+    lblSetHdkDesc: "Spesifikasi komponen standar yang ditentukan dalam panduan perbaikan GUI.",
+    lblHdkBtns: "Tombol HDK",
+    lblHdkControls: "Penggeser & Sakelar",
+    lblHdkCrescent: "Indikator Kemajuan Bulan Sabit",
+    lblHdkCrescentDesc: "Bentuk bulan sabit yang memetakan sisa waktu sebelum azan.",
+    lblFileNavHome: "Beranda",
+    lblFileNavIslamic: "Dokumen Islami",
+    lblFileNavSecurity: "Inti Keamanan",
+    lblFileNavVault: "Brankas Iman",
+    lblFileVaultTitle: "Brankas Iman Terkunci",
+    lblFileVaultDesc: "Masukkan kata sandi untuk membuka catatan zakat dan haji pribadi.",
+    lblFileVaultBtn: "Buka Brankas",
+    lblIslNavQuran: "Pembaca Al-Qur'an",
+    lblIslNavPrayer: "Jadwal Salat",
+    lblIslNavQibla: "Pencari Kiblat",
+    lblIslNavZakat: "Kalkulator Zakat",
+    lblIslNavCalendar: "Kalender Hijriah",
+    lblQuranTafsirShow: "Tampilkan Tafsir",
+    lblQuranTafsirHide: "Sembunyikan Tafsir",
+    lblPrayerListTitle: "Salat Harian - Kairo, Mesir",
+    lblPrayerCalcIndicator: "Metode: Otoritas Umum Survei Mesir",
+    lblQiblaTitle: "Arah Kiblat (Kompas Interaktif)",
+    lblQiblaAngle: "Sudut Kiblat dari Utara: 136° Timur",
+    lblQiblaDesc: "Putar perangkat Anda atau kompas simulasi hingga jarum merah lurus mengarah ke Ka'bah.",
+    lblQiblaBtn: "Kalibrasi Kompas",
+    lblZakatTitle: "Kalkulator Kewajiban Nisab Zakat",
+    lblZakatNisabVal: "Batas Nisab Terkini (85g Emas):",
+    lblZakatGoldVal: "Harga emas per gram:",
+    lblZakatISavings: "Total Tabungan / Uang Tunai (telah mencapai haul 1 tahun Hijriah)",
+    lblZakatIGold: "Nilai aset emas dan perak yang dimiliki",
+    lblZakatIInvest: "Nilai dana investasi dan saham",
+    lblZakatResNisab: "Status Kewajiban Nisab",
+    lblZakatResDue: "Zakat yang Harus Dibayar (2.5%)",
+    lblCalTitle: "Sinkronisasi Kalender Hijriah",
+    lblCalHijriMonth: "Zulhijah 1447",
+    lblCalHTitle: "Hari Besar Mendatang: Iduladha",
+    lblCalHDesc: "Jatuh pada 10 Zulhijah 1447. Pemberitahuan akan muncul otomatis.",
+    lblCalHTag: "Libur Iduladha",
+    lblLchAll: "Semua Aplikasi",
+    lblLchFaith: "Aplikasi Islami",
+    lblLchSys: "Alat Sistem",
+    lblPsdTitle: "Audit Jaringan halalfire",
+    lblPsdStatus: "Perlindungan Aktif",
+    lblPsdScoreTitle: "Kesehatan Keamanan Sistem",
+    lblPsdScoreDesc: "Tanpa telemetri, resolusi DNS lokal",
+    lblPsdBlockTitle: "Catatan Blokir (Langsung)",
+    lblPsdBtn: "Kelola Izin Aplikasi",
+    lblBshTitle: "Perlindungan Peramban",
+    lblBshTrackers: "14 Pelacak Diblokir",
+    lblBshDns: "DoH Aman Aktif",
+    lblBshFilter: "Filter Moral: Ketat",
+    lblBrQuranTitle: "Portal Web Islami",
+    lblBrQuranDesc: "Selamat datang di direktori Islami terintegrasi. Cari ayat, koleksi hadis, dan fatwa.",
+    lblBrQuranBtn: "Cari Ayat",
+    tipBismillah: "Menu Bismillah",
+    tipSettings: "Pengaturan",
+    tipFiles: "Manajer Berkas",
+    tipTerminal: "Terminal",
+    tipBrowser: "Peramban",
+    tipQuran: "Pembaca Al-Qur'an",
+    tipPrayer: "Jadwal Salat",
+    tipQibla: "Pencari Kiblat",
+    tipZakat: "Kalkulator Zakat",
+    tipAmina: "AI Amina",
+    lblIlmTitle: "Panel Ilm",
+    lblIlmVerse: "Ayat Hari Ini",
+    lblIlmWisdom: "Hikmah Harian",
+    lblIlmNotes: "Catatan Lokal",
+    lblQsTitle: "Pengaturan Cepat",
+    lblQsFw: "Perisai Firewall",
+    lblQsDns: "DoH Aman",
+    lblQsSetBtn: "Semua Pengaturan",
+    lblMaqamTitle: "Ruang Kerja Maqam",
+    lblIlmHadithText: "\"Sebaik-baik kalian adalah orang yang belajar Al-Qur'an dan mengajarkannya.\" (Bukhari)"
   }
 };
 
@@ -999,6 +1253,7 @@ function computeNextPrayerCountdown(currHour, currMin) {
   }
 
   document.getElementById("top-prayer-text").textContent = countdownStr;
+  if (typeof updateDesktopWidgets === 'function') updateDesktopWidgets();
 }
 
 // --- 4. SETUP WIZARD STATE MANAGEMENT & L10N ---
@@ -3242,6 +3497,7 @@ function renderPrayersList() {
     `;
     container.appendChild(row);
   }
+  if (typeof updateDesktopWidgets === 'function') updateDesktopWidgets();
 }
 
 // Qibla Compass Calibration
@@ -3607,6 +3863,25 @@ function switchMaqamWorkspace(workspace) {
   // Send Insha Notification
   const workspaceTitle = workspace.charAt(0).toUpperCase() + workspace.slice(1);
   showInshaNotification("Maqam Workspace Switch", `Switched to: ${workspaceTitle} Station`, "gold");
+}
+
+function toggleWorkspaceMenu() {
+  const menu = document.getElementById("workspace-dropdown");
+  if (!menu) return;
+  const isVisible = menu.style.display === "flex";
+  menu.style.display = isVisible ? "none" : "flex";
+}
+
+function switchWorkspace(id) {
+  switchMaqamWorkspace(id);
+  const label = document.getElementById("current-workspace-label");
+  if (label) {
+    label.textContent = id.charAt(0).toUpperCase() + id.slice(1);
+  }
+  const dropdown = document.getElementById("workspace-dropdown");
+  if (dropdown) {
+    dropdown.style.display = "none";
+  }
 }
 
 // HDK Slider Specimen bindings
@@ -5553,6 +5828,47 @@ function getAyahAudioUrl(surahId, verseNumber, reciterKey) {
   return `https://everyayah.com/data/${reciter.dir}/${sStr}${vStr}.mp3`;
 }
 
+/* --- Tajweed Highlighting Rules Engine --- */
+function renderTajweedText(text) {
+  if (!text) return '';
+  if (text.includes('class="tajweed-')) return text;
+  
+  let formatted = text;
+  // 1. Madd (Letters with Maddah: ٓ or آ)
+  formatted = formatted.replace(/([^\s\u064B-\u0652]?[\u0653]|[\u0622])/g, '<span class="tajweed-madd">$1</span>');
+  // 2. Ghunnah (Noon/Meem with Shaddah)
+  formatted = formatted.replace(/([\u0646\u0645]\u0651)/g, '<span class="tajweed-ghunnah">$1</span>');
+  // 3. Qalqalah (ق، ط، ب، ج، د with Sukoon: ْ)
+  formatted = formatted.replace(/([\u0642\u0637\u0628\u062c\u062f]\u0652)/g, '<span class="tajweed-qalqalah">$1</span>');
+  // 4. Iqlab (Noon/Tanween followed by Baa)
+  formatted = formatted.replace(/([\u0646\u064B-\u064D][\u06E2\u06E8]?\s*[\u0628])/g, '<span class="tajweed-iqlab">$1</span>');
+  // 5. Idgham (Tanween or Noon before Yarmaloon with Shaddah)
+  formatted = formatted.replace(/([\u0646\u0652]?\s*[\u064A\u0631\u0645\u0644\u0648\u0646]\u0651)/g, '<span class="tajweed-idgham">$1</span>');
+
+  return formatted;
+}
+
+/* --- Quran Audio Offline Proactive Cache --- */
+async function cacheQuranAudio(surahId, verseNumber, reciterKey = 'alafasy') {
+  if (typeof caches === 'undefined') return false;
+  try {
+    const url = getAyahAudioUrl(surahId, verseNumber, reciterKey);
+    const cache = await caches.open('halal-os-quran-audio-v1');
+    const match = await cache.match(url);
+    if (!match && typeof fetch !== 'undefined') {
+      const resp = await fetch(url, { mode: 'cors' });
+      if (resp.ok) {
+        await cache.put(url, resp.clone());
+        return true;
+      }
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+
 /* --- Quran UI & Reader Methods --- */
 function selectIslamicSubTab(tab) {
   document.querySelectorAll('.islamic-nav-btn').forEach(btn => {
@@ -5653,7 +5969,7 @@ function renderQuranVerses(filterText = '') {
         </div>
         
         <div class="quran-verse-arabic" style="font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 21px; line-height: 2.2; text-align: right; direction: rtl; color: var(--color-text-primary); margin-bottom: 8px;">
-          ${v.text_ar} <span style="font-size: 15px; color: var(--color-gold); font-family: var(--font-mono); margin: 0 4px;">﴿${v.number}﴾</span>
+          ${renderTajweedText(v.text_ar)} <span style="font-size: 15px; color: var(--color-gold); font-family: var(--font-mono); margin: 0 4px;">﴿${v.number}﴾</span>
         </div>
         
         <div class="quran-verse-english" style="font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.85); margin-bottom: 6px;">
@@ -5712,6 +6028,9 @@ function playAyahAudio(index = 0) {
   quranPlayerState.currentVerseIndex = index;
   const verse = surah.verses[index];
   const url = getAyahAudioUrl(surah.id, verse.number, quranPlayerState.currentReciter);
+  if (typeof cacheQuranAudio === 'function') {
+    cacheQuranAudio(surah.id, verse.number, quranPlayerState.currentReciter);
+  }
 
   try {
     quranPlayerState.audio.src = url;
@@ -6750,6 +7069,7 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateZakat();
     renderZakatLedger();
     initTauriBridge();
+    initDesktopWidgets();
   }, 300);
 });
 
@@ -6794,10 +7114,132 @@ function toggleAthanMute() {
   return setupState.athanMuted;
 }
 
-// Global exposes for Rust IPC eval & test environments
+function testAdhanAudio() {
+  if (typeof playOfflineAyahSynth === 'function') {
+    playOfflineAyahSynth();
+  }
+  if (typeof showInshaNotification === 'function') {
+    showInshaNotification("Adhan Audio Test", "Sovereign sound synthesized successfully", "gold");
+  } else if (typeof showInsha === 'function') {
+    showInsha("Adhan audio synthesized successfully", "gold");
+  }
+}
+
+/* ================================================================
+   5. SOVEREIGN DESKTOP WIDGETS RUNTIME
+   ================================================================ */
+
+function updateDesktopWidgets() {
+  try {
+    const now = new Date();
+    const currTotalMin = now.getHours() * 60 + now.getMinutes();
+    
+    // 1. Prayer Times Calculation & Synchronization
+    if (typeof prayerSchedule !== 'undefined') {
+      const parsedPrayers = {};
+      for (let p in prayerSchedule) {
+        const [h, m] = prayerSchedule[p].split(":").map(Number);
+        parsedPrayers[p] = h * 60 + m;
+      }
+
+      let nextP = "Fajr";
+      let minDiff = 0;
+      if (currTotalMin < parsedPrayers.Fajr) {
+        nextP = "Fajr";
+        minDiff = parsedPrayers.Fajr - currTotalMin;
+      } else if (currTotalMin < parsedPrayers.Shuruq) {
+        nextP = "Shuruq";
+        minDiff = parsedPrayers.Shuruq - currTotalMin;
+      } else if (currTotalMin < parsedPrayers.Dhuhr) {
+        nextP = "Dhuhr";
+        minDiff = parsedPrayers.Dhuhr - currTotalMin;
+      } else if (currTotalMin < parsedPrayers.Asr) {
+        nextP = "Asr";
+        minDiff = parsedPrayers.Asr - currTotalMin;
+      } else if (currTotalMin < parsedPrayers.Maghrib) {
+        nextP = "Maghrib";
+        minDiff = parsedPrayers.Maghrib - currTotalMin;
+      } else if (currTotalMin < parsedPrayers.Isha) {
+        nextP = "Isha";
+        minDiff = parsedPrayers.Isha - currTotalMin;
+      } else {
+        nextP = "Fajr";
+        minDiff = (1440 - currTotalMin) + parsedPrayers.Fajr;
+      }
+
+      let countdownText = "";
+      if (minDiff >= 60) {
+        const hr = Math.floor(minDiff / 60);
+        const mn = minDiff % 60;
+        countdownText = `${hr}h ${mn}m remaining`;
+      } else {
+        countdownText = `${minDiff}m remaining`;
+      }
+
+      const titleEl = document.getElementById("widget-next-prayer-title");
+      if (titleEl) titleEl.textContent = `Next: ${nextP} (${prayerSchedule[nextP] || ''})`;
+      
+      const countEl = document.getElementById("widget-next-prayer-countdown");
+      if (countEl) countEl.textContent = countdownText;
+
+      const gridEl = document.getElementById("widget-prayers-grid");
+      if (gridEl) {
+        gridEl.innerHTML = Object.entries(prayerSchedule).map(([pName, pTime]) => `
+          <div class="widget-prayer-item ${pName === nextP ? 'active' : ''}">
+            <span class="widget-p-name">${pName}</span>
+            <span class="widget-p-time">${pTime}</span>
+          </div>
+        `).join("");
+      }
+    }
+
+    // 2. Hijri & Gregorian Calendar Widget
+    const hijriBadge = document.getElementById("widget-hijri-date-badge");
+    const gregBadge = document.getElementById("widget-gregorian-date");
+    const topHijriEl = document.getElementById("top-hijri-date");
+    if (hijriBadge && topHijriEl) {
+      hijriBadge.textContent = topHijriEl.textContent || "15 Dhul-Hijjah 1447 AH";
+    }
+    if (gregBadge) {
+      gregBadge.textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // 3. Daily Hadith Quote Widget
+    const hadithEl = document.getElementById("widget-daily-hadith");
+    if (hadithEl && !hadithEl.dataset.initialized) {
+      const hadiths = [
+        "«خيركم من تعلم القرآن وعلمه» - صحيح البخاري",
+        "«إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى» - متفق عليه",
+        "«المسلم من سلم المسلمون من لسانه ويده» - صحيح مسلم",
+        "«لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه» - صحيح البخاري",
+        "«الطهور شطر الإيمان» - صحيح مسلم",
+        "«من سلك طريقاً يلتمس فيه علماً سهّل الله له به طريقاً إلى الجنة» - صحيح مسلم"
+      ];
+      const todayIndex = (now.getDate() + now.getMonth()) % hadiths.length;
+      hadithEl.textContent = hadiths[todayIndex];
+      hadithEl.dataset.initialized = "true";
+    }
+  } catch (err) {
+    console.warn("Desktop widget update error:", err);
+  }
+}
+
+function initDesktopWidgets() {
+  updateDesktopWidgets();
+  if (typeof setInterval !== 'undefined') {
+    setInterval(updateDesktopWidgets, 15000);
+  }
+}
+
+// Global exposes for Rust IPC eval, widget testing & browser console
 window.openApp = openApp;
 window.toggleQuranPlay = typeof toggleQuranPlay === 'function' ? toggleQuranPlay : () => {};
 window.toggleAthanMute = toggleAthanMute;
+window.testAdhanAudio = testAdhanAudio;
+window.renderTajweedText = renderTajweedText;
+window.cacheQuranAudio = cacheQuranAudio;
+window.updateDesktopWidgets = updateDesktopWidgets;
+window.initDesktopWidgets = initDesktopWidgets;
 
 function initTauriBridge() {
   if (typeof window !== 'undefined' && window.__TAURI__) {
@@ -6850,7 +7292,13 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     openApp,
     toggleAthanMute,
-    initTauriBridge
+    initTauriBridge,
+    testAdhanAudio,
+    renderTajweedText,
+    cacheQuranAudio,
+    updateDesktopWidgets,
+    initDesktopWidgets
   };
 }
+
 

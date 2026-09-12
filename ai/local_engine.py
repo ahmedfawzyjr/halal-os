@@ -18,6 +18,7 @@ import json
 import time
 import sys
 import os
+import sqlite3
 import urllib.request
 import urllib.error
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -32,8 +33,9 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 # Default configuration
 DEFAULT_PORT = 8088
-DEFAULT_MODEL = "phi3-mini-4bit (Local Sovereign Engine)"
+DEFAULT_MODEL = "phi3-mini-4bit (Local Sovereign Engine + RAG)"
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+DB_PATH = os.path.join(os.path.dirname(__file__), "amina_knowledge.db")
 
 def safe_print(text):
     try:
@@ -45,7 +47,7 @@ def safe_print(text):
             pass
 
 class AminaKnowledgeBase:
-    """Offline Islamic & Halal OS Knowledge Base"""
+    """Offline Islamic & Halal OS Knowledge Base with SQLite RAG Index"""
     
     QURAN_SURAS = {
         "الفاتحة": {"id": 1, "verses": 7, "type": "مكية", "name_en": "Al-Fatiha"},
@@ -66,6 +68,76 @@ class AminaKnowledgeBase:
         "rate": 0.025, # 2.5%
         "rules": "تجب الزكاة في المال إذا بلغ النصاب (قيمة 85 جرام ذهب عيار 21 أو 595 جرام فضة) وحال عليه الحول الهجري كاملاً، وخلا من الدين المتعلق بالحاجة الأصلية."
     }
+
+    def __init__(self, db_path=DB_PATH):
+        self.db_path = db_path
+        self._init_db()
+
+    def _init_db(self):
+        """Initialize SQLite RAG table with authentic Islamic texts"""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS knowledge_items (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    category TEXT,
+                    title TEXT,
+                    content TEXT,
+                    source TEXT,
+                    keywords TEXT
+                )
+            ''')
+            
+            # Check if seeded
+            cursor.execute("SELECT COUNT(*) FROM knowledge_items")
+            if cursor.fetchone()[0] == 0:
+                initial_data = [
+                    ("hadith", "النية والإخلاص", "إنما الأعمال بالنيات وإنما لكل امرئ ما نوى", "صحيح البخاري", "نية اعمال اخلاص طهارة"),
+                    ("hadith", "الرحمة بالألقين", "الراحمون يرحمهم الرحمن، ارحموا من في الأرض يرحمكم من في السماء", "سنن الترمذي", "رحمة عطف إحسان"),
+                    ("fiqh", "أحكام الصلاة والطهارة", "لا تقبل صلاة بغير طهور، ولا صدقة من غلول", "صحيح مسلم", "صلاة طهارة وضوء طهور"),
+                    ("fiqh", "الأمانة في العمل والتقنية", "إن الله يحب إذا عمل أحدكم عملاً أن يتقنه", "شعب الإيمان للبيهقي", "أمانة إتقان عمل تقنية حلال"),
+                    ("tafseer", "تفسير آية الكرسي", "الله لا إله إلا هو الحي القيوم - أعظم آية في كتاب الله تحفظ العبد وتورث السكينة", "تفسير ابن كثير", "كرسي آية توحيد سكينة حماية")
+                ]
+                cursor.executemany('''
+                    INSERT INTO knowledge_items (category, title, content, source, keywords)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', initial_data)
+                conn.commit()
+            conn.close()
+        except Exception as e:
+            safe_print(f"⚠️ [Amina RAG DB Init Warning]: {e}")
+
+    def rag_search(self, query):
+        """Retrieve relevant Islamic knowledge items via RAG keyword & score match"""
+        results = []
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            words = [w.strip() for w in query.split() if len(w.strip()) > 2]
+            if not words:
+                words = [query]
+            
+            like_clauses = " OR ".join(["content LIKE ? OR keywords LIKE ? OR title LIKE ?" for _ in words])
+            params = []
+            for w in words:
+                pattern = f"%{w}%"
+                params.extend([pattern, pattern, pattern])
+
+            sql = f"SELECT category, title, content, source FROM knowledge_items WHERE {like_clauses} LIMIT 3"
+            cursor.execute(sql, params)
+            for row in cursor.fetchall():
+                results.append({
+                    "category": row[0],
+                    "title": row[1],
+                    "content": row[2],
+                    "source": row[3]
+                })
+            conn.close()
+        except Exception as e:
+            safe_print(f"⚠️ [Amina RAG Search Error]: {e}")
+        return results
+
 
 class AminaLocalEngine:
     def __init__(self, model_name=DEFAULT_MODEL):
@@ -201,7 +273,19 @@ class AminaLocalEngine:
                 "confidence": 0.95
             }
 
-        # 9. Try local Ollama if running, otherwise use intelligent conversational fallback
+        # 9. Offline SQLite RAG Knowledge Retrieval (Hadith, Fiqh, Tafseer)
+        rag_hits = self.knowledge.rag_search(query_strip)
+        if rag_hits:
+            hit = rag_hits[0]
+            return {
+                "response": f"المعرفة الشرعية السيادية (المصدر: {hit['source']} - {hit['title']}):\n«{hit['content']}»\n\nنصيحة أمينة: تم جلب المعرفة أوفلاين 100% بدون أي تسريب للبيانات أو اتصال سحابي.",
+                "action": "RAG_KNOWLEDGE_RETRIEVAL",
+                "source": hit["source"],
+                "title": hit["title"],
+                "confidence": 0.96
+            }
+
+        # 10. Try local Ollama if running, otherwise use intelligent conversational fallback
         ollama_reply = self.query_ollama(query_strip)
         if ollama_reply:
             return {

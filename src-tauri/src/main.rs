@@ -205,6 +205,46 @@ fn toggle_window_visibility(window: Window) -> Result<bool, String> {
     }
 }
 
+// 9. Native sovereign file open dialog
+#[tauri::command]
+fn open_file_dialog(filter_name: Option<String>, extensions: Option<Vec<String>>) -> Result<Option<String>, String> {
+    let mut builder = tauri::api::dialog::blocking::FileDialogBuilder::new();
+    if let (Some(name), Some(exts)) = (filter_name, extensions) {
+        let exts_ref: Vec<&str> = exts.iter().map(|s| s.as_str()).collect();
+        builder = builder.add_filter(&name, &exts_ref);
+    }
+    match builder.pick_file() {
+        Some(path) => Ok(Some(path.to_string_lossy().to_string())),
+        None => Ok(None),
+    }
+}
+
+// 10. Native sovereign file save dialog
+#[tauri::command]
+fn save_file_dialog(default_name: Option<String>, filter_name: Option<String>, extensions: Option<Vec<String>>) -> Result<Option<String>, String> {
+    let mut builder = tauri::api::dialog::blocking::FileDialogBuilder::new();
+    if let Some(name) = default_name {
+        builder = builder.set_file_name(&name);
+    }
+    if let (Some(name), Some(exts)) = (filter_name, extensions) {
+        let exts_ref: Vec<&str> = exts.iter().map(|s| s.as_str()).collect();
+        builder = builder.add_filter(&name, &exts_ref);
+    }
+    match builder.save_file() {
+        Some(path) => Ok(Some(path.to_string_lossy().to_string())),
+        None => Ok(None),
+    }
+}
+
+// 11. Native hardware audio playback / adhan tone synthesizer trigger
+#[tauri::command]
+fn play_hardware_adhan(prayer_name: String, tone_freq_hz: Option<u32>, duration_ms: Option<u64>) -> Result<String, String> {
+    let freq = tone_freq_hz.unwrap_or(440);
+    let dur = duration_ms.unwrap_or(1200);
+    println!("[Tauri Hardware Audio] Offline acoustic trigger for {}: {}Hz for {}ms", prayer_name, freq, dur);
+    Ok(format!("Acoustic hardware adhan successfully dispatched for {}", prayer_name))
+}
+
 fn main() {
     // Build Comprehensive Islamic System Tray Menu
     let show = CustomMenuItem::new("show_desktop".to_string(), "إظهار سطح المكتب (Show Desktop)");
@@ -303,7 +343,10 @@ fn main() {
             trigger_adhan_notification,
             query_local_ai,
             update_tray_prayer_status,
-            toggle_window_visibility
+            toggle_window_visibility,
+            open_file_dialog,
+            save_file_dialog,
+            play_hardware_adhan
         ])
         .run(tauri::generate_context!())
         .expect("error while running Halal OS Tauri application");

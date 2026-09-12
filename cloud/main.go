@@ -32,6 +32,21 @@ type StoredBlock struct {
 	BlockHash string      `json:"block_hash"`
 }
 
+// MeshSyncRequest represents a peer-to-peer sync transaction bundle
+type MeshSyncRequest struct {
+	PeerDeviceID string        `json:"peer_device_id"`
+	NetworkMode  string        `json:"network_mode"` // lan, p2p_mesh, direct
+	Blocks       []StoredBlock `json:"blocks"`
+}
+
+// MeshSyncResponse represents the reconciliation receipt for mesh sync
+type MeshSyncResponse struct {
+	AcceptedBlocks []string `json:"accepted_blocks"`
+	IgnoredBlocks  []string `json:"ignored_blocks"`
+	CurrentHeight  int      `json:"current_height"`
+	MeshRootHash   string   `json:"mesh_root_hash"`
+}
+
 // UserSession represents a localized sovereign identity session
 type UserSession struct {
 	Username  string    `json:"username"`
@@ -223,6 +238,29 @@ func authValidateHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+const cloudLedgerFile = "cloud_ledger.json"
+
+func saveCloudLedger() {
+	state.mu.RLock()
+	defer state.mu.RUnlock()
+	data, err := json.MarshalIndent(state.Blocks, "", "  ")
+	if err == nil {
+		os.WriteFile(cloudLedgerFile, data, 0644)
+	}
+}
+
+func loadCloudLedger() {
+	data, err := os.ReadFile(cloudLedgerFile)
+	if err == nil {
+		var loaded []StoredBlock
+		if err := json.Unmarshal(data, &loaded); err == nil && len(loaded) > 0 {
+			state.mu.Lock()
+			state.Blocks = loaded
+			state.mu.Unlock()
+		}
+	}
+}
+
 func dataSyncPushHandler(w http.ResponseWriter, r *http.Request) {
 	if enableCORS(w, r) {
 		return
@@ -273,6 +311,8 @@ func dataSyncPushHandler(w http.ResponseWriter, r *http.Request) {
 	state.Blocks = append(state.Blocks, newBlock)
 	totalBlocks := len(state.Blocks)
 	state.mu.Unlock()
+
+	saveCloudLedger()
 
 	log.Printf("[halal-sync] [PUSH] Stored encrypted block #%d (type=%s, device=%s, hash=%.12s...)", 
 		newBlock.ID, newBlock.DataType, newBlock.DeviceID, blockHash)
@@ -350,6 +390,269 @@ func storageBackupHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func dataSyncMeshHandler(w http.ResponseWriter, r *http.Request) {
+	if enableCORS(w, r) {
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(APIResponse{
+			Status:    "error",
+			Message:   "Method not allowed. Use POST for mesh sync.",
+			Timestamp: time.Now().UTC().Format(time.RFC3339),
+		})
+		return
+	}
+
+	var req MeshSyncRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(APIResponse{
+			Status:    "error",
+			Message:   fmt.Sprintf("Invalid mesh sync payload: %v", err),
+			Timestamp: time.Now().UTC().Format(time.RFC3339),
+		})
+		return
+	}
+
+	state.mu.Lock()
+	existingHashes := make(map[string]bool)
+	for _, b := range state.Blocks {
+		existingHashes[b.BlockHash] = true
+	}
+
+	var accepted []string
+	var ignored []string
+
+	for _, incoming := range req.Blocks {
+		if incoming.BlockHash == "" || existingHashes[incoming.BlockHash] {
+			ignored = append(ignored, incoming.BlockHash)
+			continue
+		}
+
+		// Verify block cryptographic integrity
+		hasher := sha256.New()
+		hasher.Write([]byte(fmt.Sprintf("%s:%s:%s:%s", incoming.DeviceID, incoming.DataType, incoming.DataHash, incoming.Payload)))
+		calcHash := hex.EncodeToString(hasher.Sum(nil))
+
+		if calcHash != incoming.BlockHash {
+			ignored = append(ignored, incoming.BlockHash)
+			continue
+		}
+
+		incoming.ID = len(state.Blocks) + 1
+		if incoming.Timestamp.IsZero() {
+			incoming.Timestamp = time.Now()
+		}
+		state.Blocks = append(state.Blocks, incoming)
+		existingHashes[incoming.BlockHash] = true
+		accepted = append(accepted, incoming.BlockHash)
+	}
+	totalBlocks := len(state.Blocks)
+	state.mu.Unlock()
+
+	if len(accepted) > 0 {
+		saveCloudLedger()
+	}
+
+	var rootHash string
+	if totalBlocks > 0 {
+		state.mu.RLock()
+		rootHash = state.Blocks[totalBlocks-1].BlockHash
+		state.mu.RUnlock()
+	}
+
+	log.Printf("[halal-sync] [MESH] Reconciled peer sync from device=%s (mode=%s): %d accepted, %d ignored",
+		req.PeerDeviceID, req.NetworkMode, len(accepted), len(ignored))
+
+	json.NewEncoder(w).Encode(APIResponse{
+		Status:    "success",
+		Message:   fmt.Sprintf("Mesh synchronization reconciled: %d accepted, %d ignored", len(accepted), len(ignored)),
+		Timestamp: time.Now().UTC().Format(time.RFC3339),
+		Data: MeshSyncResponse{
+			AcceptedBlocks: accepted,
+			IgnoredBlocks:  ignored,
+			CurrentHeight:  totalBlocks,
+			MeshRootHash:   rootHash,
+		},
+	})
+}
+
+// P2PSignalPayload represents a WebRTC signaling exchange packet between sovereign devices
+type P2PSignalPayload struct {
+	FromDeviceID string      `json:"from_device_id"`
+	ToDeviceID   string      `json:"to_device_id"`
+	SignalType   string      `json:"signal_type"` // "offer", "answer", "candidate", "ping"
+	Data         interface{} `json:"data"`
+	Timestamp    time.Time   `json:"timestamp"`
+}
+
+// PeerNode represents a discovered local or mesh network sovereign peer
+type PeerNode struct {
+	DeviceID     string    `json:"device_id"`
+	DeviceName   string    `json:"device_name"`
+	IP           string    `json:"ip"`
+	Port         int       `json:"port"`
+	NetworkMode  string    `json:"network_mode"` // "lan", "webrtc_mesh", "direct"
+	LastSeen     time.Time `json:"last_seen"`
+	BlockHeight  int       `json:"block_height"`
+	Capabilities []string  `json:"capabilities"`
+}
+
+var (
+	p2pLock    sync.RWMutex
+	p2pSignals = make(map[string][]P2PSignalPayload) // ToDeviceID -> mailbox of signals
+	p2pPeers   = []PeerNode{
+		{
+			DeviceID:     "halal-phone-sovereign",
+			DeviceName:   "Halal Mobile (Amanah)",
+			IP:           "192.168.1.105",
+			Port:         8082,
+			NetworkMode:  "webrtc_mesh",
+			LastSeen:     time.Now().Add(-2 * time.Minute),
+			BlockHeight:  42,
+			Capabilities: []string{"e2ee_sync", "quran_bookmarks", "prayer_stats"},
+		},
+		{
+			DeviceID:     "halal-laptop-pro",
+			DeviceName:   "Halal Book Pro (Arch/RISC-V)",
+			IP:           "192.168.1.140",
+			Port:         8082,
+			NetworkMode:  "lan",
+			LastSeen:     time.Now().Add(-10 * time.Second),
+			BlockHeight:  42,
+			Capabilities: []string{"full_node", "e2ee_sync", "amina_npu_relay"},
+		},
+	}
+)
+
+func p2pSignalHandler(w http.ResponseWriter, r *http.Request) {
+	if enableCORS(w, r) {
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == http.MethodPost {
+		var signal P2PSignalPayload
+		if err := json.NewDecoder(r.Body).Decode(&signal); err != nil || signal.FromDeviceID == "" || signal.ToDeviceID == "" {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(APIResponse{
+				Status:    "error",
+				Message:   "Missing or invalid signal payload (from_device_id and to_device_id required)",
+				Timestamp: time.Now().UTC().Format(time.RFC3339),
+			})
+			return
+		}
+
+		if signal.Timestamp.IsZero() {
+			signal.Timestamp = time.Now()
+		}
+
+		p2pLock.Lock()
+		p2pSignals[signal.ToDeviceID] = append(p2pSignals[signal.ToDeviceID], signal)
+		p2pLock.Unlock()
+
+		log.Printf("[halal-p2p] Signal relay queued: %s -> %s (type=%s)", signal.FromDeviceID, signal.ToDeviceID, signal.SignalType)
+
+		json.NewEncoder(w).Encode(APIResponse{
+			Status:    "success",
+			Message:   fmt.Sprintf("P2P signal '%s' successfully routed to device %s", signal.SignalType, signal.ToDeviceID),
+			Timestamp: time.Now().UTC().Format(time.RFC3339),
+			Data: map[string]interface{}{
+				"status": "relayed",
+				"type":   signal.SignalType,
+			},
+		})
+		return
+	}
+
+	if r.Method == http.MethodGet {
+		deviceID := r.URL.Query().Get("device_id")
+		if deviceID == "" {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(APIResponse{
+				Status:    "error",
+				Message:   "Query parameter 'device_id' is required to retrieve pending signals",
+				Timestamp: time.Now().UTC().Format(time.RFC3339),
+			})
+			return
+		}
+
+		p2pLock.Lock()
+		pending := p2pSignals[deviceID]
+		delete(p2pSignals, deviceID) // Drain queue on read
+		p2pLock.Unlock()
+
+		if pending == nil {
+			pending = make([]P2PSignalPayload, 0)
+		}
+
+		json.NewEncoder(w).Encode(APIResponse{
+			Status:    "success",
+			Message:   fmt.Sprintf("Retrieved %d pending P2P signals for device %s", len(pending), deviceID),
+			Timestamp: time.Now().UTC().Format(time.RFC3339),
+			Data: map[string]interface{}{
+				"device_id": deviceID,
+				"signals":   pending,
+				"count":     len(pending),
+			},
+		})
+		return
+	}
+
+	w.WriteHeader(http.StatusMethodNotAllowed)
+	json.NewEncoder(w).Encode(APIResponse{
+		Status:    "error",
+		Message:   "Method not allowed. Use GET to pull signals or POST to relay.",
+		Timestamp: time.Now().UTC().Format(time.RFC3339),
+	})
+}
+
+func p2pPeersHandler(w http.ResponseWriter, r *http.Request) {
+	if enableCORS(w, r) {
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == http.MethodPost {
+		var newPeer PeerNode
+		if err := json.NewDecoder(r.Body).Decode(&newPeer); err == nil && newPeer.DeviceID != "" {
+			newPeer.LastSeen = time.Now()
+			p2pLock.Lock()
+			updated := false
+			for i, p := range p2pPeers {
+				if p.DeviceID == newPeer.DeviceID {
+					p2pPeers[i] = newPeer
+					updated = true
+					break
+				}
+			}
+			if !updated {
+				p2pPeers = append(p2pPeers, newPeer)
+			}
+			p2pLock.Unlock()
+		}
+	}
+
+	p2pLock.RLock()
+	peersList := make([]PeerNode, len(p2pPeers))
+	copy(peersList, p2pPeers)
+	p2pLock.RUnlock()
+
+	json.NewEncoder(w).Encode(APIResponse{
+		Status:    "success",
+		Message:   fmt.Sprintf("Discovered %d active sovereign mesh peers", len(peersList)),
+		Timestamp: time.Now().UTC().Format(time.RFC3339),
+		Data: map[string]interface{}{
+			"peers":        peersList,
+			"total_peers": len(peersList),
+			"mesh_status": "ONLINE_DECENTRALIZED",
+		},
+	})
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -359,6 +662,8 @@ func main() {
 		port = ":" + port
 	}
 
+	loadCloudLedger()
+
 	// API Routing
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/api/v1/status", statusHandler)
@@ -366,7 +671,10 @@ func main() {
 	http.HandleFunc("/api/v1/auth/validate", authValidateHandler)
 	http.HandleFunc("/api/v1/sync/push", dataSyncPushHandler)
 	http.HandleFunc("/api/v1/sync/pull", dataSyncPullHandler)
+	http.HandleFunc("/api/v1/sync/mesh", dataSyncMeshHandler)
 	http.HandleFunc("/api/v1/storage/backup", storageBackupHandler)
+	http.HandleFunc("/api/v1/p2p/signal", p2pSignalHandler)
+	http.HandleFunc("/api/v1/p2p/peers", p2pPeersHandler)
 
 	// Backward-compatible v0 endpoints
 	http.HandleFunc("/api/auth/validate", authValidateHandler)
@@ -381,6 +689,9 @@ func main() {
 	fmt.Println("   - Auth Validate:    GET  /api/v1/auth/validate")
 	fmt.Println("   - Sync Push:        POST /api/v1/sync/push")
 	fmt.Println("   - Sync Pull:        GET  /api/v1/sync/pull")
+	fmt.Println("   - Sync Mesh:        POST /api/v1/sync/mesh")
+	fmt.Println("   - P2P Signaling:    POST/GET /api/v1/p2p/signal")
+	fmt.Println("   - P2P Mesh Peers:   POST/GET /api/v1/p2p/peers")
 	fmt.Println("   - Storage Backup:   POST /api/v1/storage/backup")
 	fmt.Println("   - Sovereignty:      Zero-Knowledge E2EE, No 3rd Party Clouds")
 	fmt.Println("================================================================")

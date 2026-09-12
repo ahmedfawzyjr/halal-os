@@ -13,6 +13,10 @@ src-tauri/target/
 *.log
 tmp/
 temp/
+*.lnk
+*.msi
+*.exe
+*.iso
 
 # Exclude antigravity workspace metadata and project plan documents
 antigravity/

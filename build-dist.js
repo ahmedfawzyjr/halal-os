@@ -24,4 +24,14 @@ filesToCopy.forEach(file => {
   }
 });
 
+const dirsToCopy = ['locales', 'assets'];
+dirsToCopy.forEach(dir => {
+  const srcDir = path.join(__dirname, dir);
+  const destDir = path.join(distDir, dir);
+  if (fs.existsSync(srcDir)) {
+    fs.cpSync(srcDir, destDir, { recursive: true });
+    console.log(`[build-dist] Copied ${dir}/ -> dist/${dir}/`);
+  }
+});
+
 console.log('[build-dist] Static web distribution assets ready in dist/');

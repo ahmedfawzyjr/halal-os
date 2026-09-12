@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" fill="none">
+  <defs>
+    <linearGradient id="p-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(-10, -10)">
+    <rect x="24" y="24" width="80" height="80" rx="18" stroke="url(#p-grad)" stroke-width="7" fill="none"/>
+    <polygon points="64,42 82,64 64,86 46,64" fill="#F59E0B"/>
+    <circle cx="64" cy="64" r="5" fill="#042F2E"/>
+    <line x1="24" y1="64" x2="42" y2="64" stroke="#0D9488" stroke-width="4" stroke-linecap="round"/>
+    <line x1="86" y1="64" x2="104" y2="64" stroke="#0D9488" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "name": "Halal OS Sovereign eBPF Network Shield",
+  "description": "Kernel-level eBPF packet filter specifications for zero-telemetry enforcement and halal network integrity",
+  "engine": "XDP_DROP + TC_BPF",
+  "default_policy": {
+    "inbound": "ALLOW_ESTABLISHED",
+    "outbound": "AUDIT_STRICT",
+    "telemetry": "DROP_SILENT"
+  },
+  "blocked_telemetry_cidrs": [
+    "10.0.0.10/32",
+    "20.0.0.0/11",
+    "40.74.0.0/15",
+    "52.160.0.0/11",
+    "142.250.0.0/15"
+  ],
+  "blocked_domains": [
+    "*.telemetry.microsoft.com",
+    "v10.events.data.microsoft.com",
+    "*.google-analytics.com",
+    "*.analytics.yahoo.com",
+    "metrics.ubuntu.com",
+    "popcon.debian.org",
+    "telemetry.mozilla.org",
+    "crash-stats.mozilla.com"
+  ],
+  "blocked_ports": [
+    {
+      "protocol": "TCP",
+      "port": 2869,
+      "reason": "SSDP / UPnP Device Eventing telemetry"
+    },
+    {
+      "protocol": "UDP",
+      "port": 1900,
+      "reason": "UPnP broadcast discovery query"
+    }
+  ],
+  "xdp_rules": [
+    {
+      "id": "XDP_BLOCK_TELEMETRY_CANONICAL",
+      "action": "XDP_DROP",
+      "match": {
+        "eth_proto": "IPv4",
+        "ip_dst": "10.0.0.10"
+      },
+      "log": "KERN_ALERT: Blocked canonical telemetry egress via XDP"
+    },
+    {
+      "id": "XDP_FORCE_LOCAL_DNS",
+      "action": "XDP_PASS",
+      "match": {
+        "eth_proto": "IPv4",
+        "ip_proto": "UDP",
+        "dst_port": 53
+      },
+      "redirect": "127.0.0.1:53"
+    }
+  ],
+  "faith_safety": {
+    "khushu_mode_quench": {
+      "enabled": true,
+      "suppress_non_critical_packets_during_adhan": true,
+      "allowed_protocols": ["NTP", "LOCAL_IPC", "DNS"]
+    },
+    "audit_ledger": "/var/log/halal-os/ebpf_shield.log"
+  }
+}

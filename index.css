@@ -4789,3 +4789,217 @@ html[dir="rtl"] .zakat-cert-verse-box {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   ☪ DESKTOP WIDGETS & TAJWEED ENHANCEMENTS (HALAL OS ROADMAP)
+   ========================================================================== */
+
+/* 1. Desktop Widgets Layer */
+#desktop-widgets-layer {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.desktop-widget {
+  position: absolute;
+  pointer-events: auto;
+  background: rgba(13, 77, 58, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--r-medium);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  width: 260px;
+  user-select: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.desktop-widget:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+}
+
+.desktop-widget.dragging {
+  opacity: 0.85;
+  cursor: grabbing !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top-left-radius: var(--r-medium);
+  border-top-right-radius: var(--r-medium);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: grab;
+}
+
+.widget-header:active {
+  cursor: grabbing;
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-gold-light);
+  letter-spacing: 0.3px;
+}
+
+.widget-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.widget-btn-mini {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.widget-btn-mini:hover {
+  color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.widget-body {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.widget-prayer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.widget-prayer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: var(--r-small);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+}
+
+.widget-prayer-item.active {
+  background: rgba(212, 175, 55, 0.18);
+  border-left: 3px solid var(--color-gold);
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+html[dir="rtl"] .widget-prayer-item.active {
+  border-left: none;
+  border-right: 3px solid var(--color-gold);
+}
+
+.widget-date-badge {
+  text-align: center;
+  padding: 8px;
+  border-radius: var(--r-small);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.widget-hijri-month {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-gold);
+  font-family: var(--font-arabic-heading), var(--font-sans);
+}
+
+.widget-gregorian {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.widget-event-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(46, 204, 113, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  color: #2ecc71;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* 2. Tajweed Color-Coded Typography Rules */
+.tajweed-text {
+  line-height: 2.2;
+  font-family: var(--font-quran), 'Amiri', 'Traditional Arabic', serif;
+  font-size: 26px;
+  word-spacing: 4px;
+}
+
+/* Ghunnah (Nasalization - 2 Harakah) */
+.tajweed-ghunnah {
+  color: #2ecc71 !important; /* Emerald Green */
+  font-weight: bold;
+}
+
+/* Qalqalah (Echoing sound: ق ط ب ج د) */
+.tajweed-qalqalah {
+  color: #3498db !important; /* Sky Blue */
+  font-weight: bold;
+}
+
+/* Idgham (Merging without/with Ghunnah) */
+.tajweed-idgham {
+  color: #e67e22 !important; /* Warm Amber */
+  font-weight: bold;
+}
+
+/* Ikhfa (Concealment / Hiding) */
+.tajweed-ikhfa {
+  color: #9b59b6 !important; /* Purple */
+  font-weight: bold;
+}
+
+/* Madd (Elongation - 4 to 6 Harakah) */
+.tajweed-madd {
+  color: #e74c3c !important; /* Vibrant Red */
+  font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 1.5px;
+}
+
+/* Iqlab (Conversion of Noon/Tanween to Meem) */
+.tajweed-iqlab {
+  color: #1abc9c !important; /* Teal */
+  font-weight: bold;
+}
+
+/* Tafkheem (Heavy Letters: خ ص ض غ ط ق ظ) */
+.tajweed-tafkheem {
+  color: #d4af37 !important; /* Halal OS Gold */
+  font-weight: 600;
+}

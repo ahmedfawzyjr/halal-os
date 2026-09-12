@@ -114,7 +114,7 @@ sudo mkdir -p "$WORKDIR/chroot/usr/share/halalos/cloud"
 sudo mkdir -p "$WORKDIR/chroot/usr/share/halalos/desktop"
 
 sudo cp -r ../ai/* "$WORKDIR/chroot/usr/share/halalos/ai/"
-sudo cp -r ../index.html ../index.css ../app.js ../desktop-shell.js ../sw.js ../manifest.json ../favicon.svg "$WORKDIR/chroot/usr/share/halalos/desktop/"
+sudo cp -r ../index.html ../index.css ../app.js ../desktop-shell.js ../sw.js ../manifest.json ../favicon.svg ../locales ../assets "$WORKDIR/chroot/usr/share/halalos/desktop/"
 
 # 7. Install Systemd Services
 echo "[7/8] Installing & enabling sovereign systemd services..."

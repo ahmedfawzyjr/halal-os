@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <!-- Background Gradient (Warm Cream & Radiant Dawn Gold) -->
+    <radialGradient id="bgLightGlow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFFDF5" />
+      <stop offset="35%" stop-color="#FAF5E8" />
+      <stop offset="70%" stop-color="#F2EAD3" />
+      <stop offset="100%" stop-color="#E2D4B5" />
+    </radialGradient>
+
+    <!-- Warm Gold Gradients -->
+    <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8B923" stop-opacity="0.8" />
+      <stop offset="30%" stop-color="#FCE182" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#D49E17" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#A97808" stop-opacity="0.85" />
+    </linearGradient>
+
+    <linearGradient id="softGold" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C59B27" stop-opacity="0.35" />
+      <stop offset="50%" stop-color="#EAC159" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#F9DE86" stop-opacity="0.25" />
+    </linearGradient>
+
+    <!-- 8-Pointed Star Motif (Rub el Hizb) -->
+    <g id="rubElHizbLight">
+      <rect x="-80" y="-80" width="160" height="160" fill="none" stroke="url(#goldMetallic)" stroke-width="2.5" />
+      <rect x="-80" y="-80" width="160" height="160" fill="none" stroke="url(#goldMetallic)" stroke-width="2.5" transform="rotate(45)" />
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#D49E17" stroke-width="1.8" />
+      <circle cx="0" cy="0" r="8" fill="#D49E17" opacity="0.7" />
+    </g>
+
+    <!-- Complex Hexagonal Arabesque Lattice Unit -->
+    <g id="arabesqueUnitLight">
+      <polygon points="0,-120 103.92,-60 103.92,60 0,120 -103.92,60 -103.92,-60" fill="none" stroke="url(#softGold)" stroke-width="1.8" />
+      <!-- Star Inset -->
+      <polygon points="0,-75 22,-22 75,0 22,22 0,75 -22,22 -75,0 -22,-22" fill="#FAF5E8" stroke="url(#goldMetallic)" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#C59B27" stroke-width="1.2" />
+    </g>
+
+    <pattern id="islamicLatticeLight" width="400" height="400" patternUnits="userSpaceOnUse">
+      <use href="#rubElHizbLight" x="200" y="200" transform="scale(0.85)" />
+      <use href="#rubElHizbLight" x="0" y="0" transform="scale(0.85)" />
+      <use href="#rubElHizbLight" x="400" y="0" transform="scale(0.85)" />
+      <use href="#rubElHizbLight" x="0" y="400" transform="scale(0.85)" />
+      <use href="#rubElHizbLight" x="400" y="400" transform="scale(0.85)" />
+      <line x1="0" y1="0" x2="200" y2="200" stroke="#D49E17" stroke-width="1" stroke-opacity="0.25" />
+      <line x1="400" y1="0" x2="200" y2="200" stroke="#D49E17" stroke-width="1" stroke-opacity="0.25" />
+      <line x1="0" y1="400" x2="200" y2="200" stroke="#D49E17" stroke-width="1" stroke-opacity="0.25" />
+      <line x1="400" y1="400" x2="200" y2="200" stroke="#D49E17" stroke-width="1" stroke-opacity="0.25" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="3840" height="2160" fill="url(#bgLightGlow)" />
+
+  <!-- Subtle Micro-Geometric Grid -->
+  <rect width="3840" height="2160" fill="url(#islamicLatticeLight)" opacity="0.45" />
+
+  <!-- Central Celestial Medallion (Solar Dawn) -->
+  <g transform="translate(1920, 1080)">
+    <!-- Outermost Star Mandala Ring -->
+    <circle cx="0" cy="0" r="750" fill="none" stroke="url(#goldMetallic)" stroke-width="1.5" stroke-dasharray="12, 8" opacity="0.4" />
+    <circle cx="0" cy="0" r="680" fill="none" stroke="#D49E17" stroke-width="2.5" opacity="0.6" />
+    <circle cx="0" cy="0" r="620" fill="none" stroke="url(#softGold)" stroke-width="3" opacity="0.5" />
+
+    <!-- 16-Fold Radial Petals -->
+    <g opacity="0.75">
+      <use href="#arabesqueUnitLight" transform="rotate(0) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(22.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(45) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(67.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(90) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(112.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(135) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(157.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(180) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(202.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(225) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(247.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(270) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(292.5) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(315) translate(0, -480) scale(0.9)" />
+      <use href="#arabesqueUnitLight" transform="rotate(337.5) translate(0, -480) scale(0.9)" />
+    </g>
+
+    <!-- Inner Core Rosette -->
+    <circle cx="0" cy="0" r="320" fill="#FFFDF8" stroke="url(#goldMetallic)" stroke-width="4" opacity="0.85" />
+    <use href="#rubElHizbLight" transform="scale(2.2)" />
+    <use href="#rubElHizbLight" transform="scale(1.4) rotate(22.5)" />
+
+    <!-- Center Jewel -->
+    <circle cx="0" cy="0" r="45" fill="url(#goldMetallic)" opacity="0.9" />
+    <circle cx="0" cy="0" r="20" fill="#FFFDF5" />
+  </g>
+
+  <!-- Architectural Mihrab Corner Framing -->
+  <g stroke="url(#goldMetallic)" fill="none" opacity="0.6">
+    <!-- Top Left -->
+    <path d="M 0,400 L 400,0 M 0,250 L 250,0 M 0,100 L 100,0" stroke-width="2.5" />
+    <rect x="40" y="40" width="80" height="80" stroke-width="2" transform="rotate(45 80 80)" />
+    <!-- Top Right -->
+    <path d="M 3840,400 L 3440,0 M 3840,250 L 3590,0 M 3840,100 L 3740,0" stroke-width="2.5" />
+    <rect x="3720" y="40" width="80" height="80" stroke-width="2" transform="rotate(45 3760 80)" />
+    <!-- Bottom Left -->
+    <path d="M 0,1760 L 400,2160 M 0,1910 L 250,2160 M 0,2060 L 100,2160" stroke-width="2.5" />
+    <rect x="40" y="2040" width="80" height="80" stroke-width="2" transform="rotate(45 80 2080)" />
+    <!-- Bottom Right -->
+    <path d="M 3840,1760 L 3440,2160 M 3840,1910 L 3590,2160 M 3840,2060 L 3740,2160" stroke-width="2.5" />
+    <rect x="3720" y="2040" width="80" height="80" stroke-width="2" transform="rotate(45 3760 2080)" />
+  </g>
+</svg>

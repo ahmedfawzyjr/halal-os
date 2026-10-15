@@ -63,7 +63,7 @@ jobs:
         run: node build-dist.js
 
       - name: Build Tauri Desktop Application
-        uses: tauri-apps/tauri-action@v0
+        uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

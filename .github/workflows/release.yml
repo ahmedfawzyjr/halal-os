@@ -35,7 +35,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.VERSION }}
           name: "Halal OS ${{ steps.version.outputs.VERSION }} ☪️"
@@ -89,7 +89,7 @@ jobs:
         run: cargo build --release
 
       - name: Upload binary artifact
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: ${{ matrix.module }}/target/release/*
         env:
